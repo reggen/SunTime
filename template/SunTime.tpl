@@ -4,6 +4,16 @@
 #! ABC compliant wrapper for SunClass class 
 #!
 #EXTENSION(SuntimeABC,'RFI Global Suntime Class'),APPLICATION
+#!<HELP>----------------------------------------------------------------------------------------------------------------------------
+#!<TEMPLATE>SunTimeABC</TEMPLATE>
+#!<CLASSES>SunClass</CLASSES>
+#!<PARENT>None</PARENT>
+#!<CATEGORY>Calculations</CATEGORY>
+#!<TYPE>EXTENSION</TYPE>
+#!<SCOPE>ABC PROCEDURE</SCOPE>
+#!<DOC>This global extension template must be added to your root DLL app or main EXE app if one application solution.
+#!This template ensures the correct code generates and is properly exported.
+#!</HELP>----------------------------------------------------------------------------------------------------------------------------
 #DECLARE(%SuntimeVersion)
 #BOXED('Default prompts'),AT(0,0),WHERE(%False),HIDE
   #INSERT (%OOPHiddenPrompts(ABC))
@@ -88,6 +98,18 @@
 #ENDAT
 #!-------------------------------------------------------------------------
 #EXTENSION(SunTimeProcedure,'RFI Local Suntime extension'),PROCEDURE,REQ(SuntimeABC),PRIMARY('Latitude and Longitude file',OPTKEY),DESCRIPTION('File with location data for sunrise and sunset calculations:' & %SunTable)
+#!<HELP>----------------------------------------------------------------------------------------------------------------------------
+#!<TEMPLATE>SunTimeProcedure</TEMPLATE>
+#!<CLASSES>SunClass</CLASSES>
+#!<PARENT>SunTimeABC</PARENT>
+#!<CATEGORY>Calculations</CATEGORY>
+#!<TYPE>EXTENSION</TYPE>
+#!<SCOPE>ABC PROCEDURE</SCOPE>
+#!<DOC>This local extension template is for use if you store latitude and longitude data in a file.  This file should appear in 
+#!the data pad.  Once it is, then fill in the prompts for the table containing the latitude and longitude.  You may enter a start date
+#!as a default (current default is today), the fields used to store latitude and longitude respectively and any offset from GMT.  An example
+#! of an offset is Eastern Standard Time which is -5 hours from GMT.  The default is GMT (zero).
+#!</HELP>----------------------------------------------------------------------------------------------------------------------------
 #INSERT(%RADFusionLogo)
 #PROMPT('Table containing location:',FILE),%SunTable,REQ
 #ENABLE(%SunTable)
